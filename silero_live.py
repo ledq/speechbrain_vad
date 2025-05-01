@@ -61,11 +61,10 @@ try:
                 input_name_sr: sr
             })
 
-            # Read outputs
-            speech_prob = outputs[0][0][0]  # Speech probability
+            
+            speech_prob = outputs[0][0][0]  
             state = outputs[1]              # Updated packed hidden+cell state
 
-            # Print speech probability
             print(f"Speech probability: {speech_prob:.3f}")
 
 except KeyboardInterrupt:
