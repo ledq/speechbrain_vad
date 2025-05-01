@@ -3,7 +3,6 @@ import numpy as np
 import pyaudio
 import queue
 
-# === Load ONNX model ===
 session = onnxruntime.InferenceSession("silero_vad.onnx")
 
 # Detect input names
@@ -22,8 +21,8 @@ sr_dtype = np.int64 if session.get_inputs()[2].type == 'tensor(int64)' else np.f
 state = np.zeros((2, 1, 128), dtype=state_dtype)  # packed hidden and cell
 sr = np.array([16000], dtype=sr_dtype)  # sampling rate
 
-# === Setup microphone ===
-sample_rate = 16000  # 16 kHz
+# Microphpone
+sample_rate = 16000  
 frames_per_buffer = 512  # or 256 for smaller chunks
 q = queue.Queue()
 
@@ -41,9 +40,9 @@ stream = p.open(format=pyaudio.paInt16,
                 stream_callback=callback)
 stream.start_stream()
 
-print("Listening... (Press Ctrl+C to stop)")
+print("Listening...")
 
-# === Main Loop ===
+
 try:
     while True:
         if not q.empty():
